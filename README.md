@@ -1,6 +1,6 @@
 # 環境構築
 
-1. Docker Desktop
+1. Docker
 2. Visual Studio Code
 3. Git
 
