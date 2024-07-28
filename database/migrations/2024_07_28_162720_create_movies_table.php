@@ -17,7 +17,6 @@ class CreateMoviesTable extends Migration
             $table->id();
             $table->text('title')->comment('映画タイトル');
             $table->text('image_url')->comment('画像URL');
-            $table->timestamps();
         });
     }
 
