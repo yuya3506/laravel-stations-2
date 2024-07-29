@@ -55,4 +55,16 @@ class MovieController extends Controller
         $post->update($request->all());
         return redirect()->route('movie.index')->with('success', 'Post updated successfully');
     }
+
+    public function destroy($id)
+    {
+        $post = Movie::find($id);
+        $ids = Movie::all()->pluck('id')->toArray();
+        if (!(in_array($id, $ids)))
+        {
+            abort(404);
+        }
+        $post->delete();
+        return redirect()->route('movie.index')->with('success', 'Post deleted successfully');
+    }
 }

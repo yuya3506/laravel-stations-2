@@ -18,7 +18,8 @@
                 <th>概要</th>
                 <th>登録日時</th>
                 <th>更新日時</th>
-                <th></th>
+                <th>編集</th>
+                <th>削除</th>
             </tr>
         </thead>
         <tbody>
@@ -38,7 +39,8 @@
                 $o .= "<td>".$movie->description."</td>";
                 $o .= "<td>".$movie->created_at."</td>";
                 $o .= "<td>".$movie->updated_at."</td>";
-                $o .= "<td><button type='button' onclick='location.href=\"" . route('movie.movieEdit', ['id' => $movie->id]) . "\"'>編集</button></td>"; 
+                $o .= "<td><button type='button' onclick='location.href=\"" . route('movie.movieEdit', ['id' => $movie->id]) . "\"'>編集</button></td>";
+                $o .= "<td><button type='button' onclick='return confirm(\"削除してもよろしいですか\"); location.href=\"" . route('movie.delete', ['id' => $movie->id]) . "\"'>削除</button></td>"; 
                 $o .= "</tr>";         
             }
             echo $o;
