@@ -17,6 +17,7 @@ class AddToMiviesTable extends Migration
             $table->integer('published_year');
             $table->text('description');
             $table->tinyInteger('is_showing')->default(0);
+            $table->timestamps();
         });
     }
 
@@ -28,11 +29,11 @@ class AddToMiviesTable extends Migration
     public function down()
     {
         Schema::table('movies', function (Blueprint $table) {
-            $table->dropColumn('published_year');
-            $table->dropColumn('description');
-            $table->dropColumn('is_showing');
-            $table->dropColumn('created_at');
-            $table->dropColumn('updated_at');
+            // $table->dropColumn('published_year');
+            // $table->dropColumn('description');
+            // $table->dropColumn('is_showing');
+            // $table->dropColumn('created_at');
+            // $table->dropColumn('updated_at');
         });
     }
 }

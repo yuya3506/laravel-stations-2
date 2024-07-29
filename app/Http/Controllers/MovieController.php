@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Movie;
+use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
@@ -15,5 +16,23 @@ class MovieController extends Controller
     {
         $movies = Movie::all();
         return view('admin_index', ['movies' => $movies]);
+    }
+
+    public function create()
+    {
+        return view('create');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'unique:movies,title'],
+            'image_url' => ['required', 'url'],
+            'published_year' => ['required', 'integer', 'min:1888', 'max:' . date('Y')],
+            'is_showing' => ['required', 'boolean'],
+            'description' => ['required', 'string']
+        ]);
+        Movie::create($validated);
+        return redirect()->route('movie.create');
     }
 }
