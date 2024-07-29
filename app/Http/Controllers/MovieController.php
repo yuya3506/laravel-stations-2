@@ -35,4 +35,24 @@ class MovieController extends Controller
         Movie::create($validated);
         return redirect()->route('movie.create');
     }
+
+    public function edit($id)
+    {
+        $movie = Movie::find($id);
+        return view('movies.edit', compact('movie'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'unique:movies,title'],
+            'image_url' => ['required', 'url'],
+            'published_year' => ['required', 'integer', 'min:1888', 'max:' . date('Y')],
+            'is_showing' => ['required', 'boolean'],
+            'description' => ['required', 'string']
+        ]);
+        $post = Movie::find($id);
+        $post->update($request->all());
+        return redirect()->route('movie.index')->with('success', 'Post updated successfully');
+    }
 }

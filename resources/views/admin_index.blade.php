@@ -18,6 +18,7 @@
                 <th>概要</th>
                 <th>登録日時</th>
                 <th>更新日時</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -37,7 +38,8 @@
                 $o .= "<td>".$movie->description."</td>";
                 $o .= "<td>".$movie->created_at."</td>";
                 $o .= "<td>".$movie->updated_at."</td>";
-                $o .= "</tr>";            
+                $o .= "<td><button type='button' onclick='location.href=\"" . route('movie.movieEdit', ['id' => $movie->id]) . "\"'>編集</button></td>"; 
+                $o .= "</tr>";         
             }
             echo $o;
             ?>

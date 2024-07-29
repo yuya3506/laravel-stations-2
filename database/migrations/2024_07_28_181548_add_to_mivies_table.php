@@ -29,11 +29,11 @@ class AddToMiviesTable extends Migration
     public function down()
     {
         Schema::table('movies', function (Blueprint $table) {
-            // $table->dropColumn('published_year');
-            // $table->dropColumn('description');
-            // $table->dropColumn('is_showing');
-            // $table->dropColumn('created_at');
-            // $table->dropColumn('updated_at');
+            $table->dropColumn('published_year');
+            $table->dropColumn('description');
+            $table->dropColumn('is_showing');
+            $table->dropColumn('created_at');
+            $table->dropColumn('updated_at');
         });
     }
 }
