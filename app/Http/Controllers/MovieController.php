@@ -6,9 +6,36 @@ use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $movies = Movie::all();
+        // デバッグ用ログ
+        \Log::info('Request data: ', $request->all());
+
+        $movies = Movie::query();
+        $keyword = $request->input('keyword');
+        $is_showing = $request->input('is_showing');
+
+        // デバッグ用ログ
+        \Log::info('Keyword: ' . $keyword);
+        \Log::info('Is Showing: ' . $is_showing);
+
+        if (!empty($keyword)) {
+            $movies = $movies->where(function($query) use ($keyword) {
+                $query->where('title', 'LIKE', "%{$keyword}%")
+                    ->orWhere('description', 'LIKE', "%{$keyword}%");
+            });
+        }
+
+        if ($is_showing !== null && $is_showing != 2) {
+            $movies = $movies->where('is_showing', '=', $is_showing);
+        }
+
+        // デバッグ用ログ
+        \Log::info('SQL Query: ' . $movies->toSql());
+        \Log::info('SQL Bindings: ', $movies->getBindings());
+
+        $movies = $movies->paginate(20);
+
         return view('getMovie', ['movies' => $movies]);
     }
 

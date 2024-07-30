@@ -7,6 +7,23 @@
     <title>Movies</title>
 </head>
 <body>
+    <div>
+        <form action="{{ route('movie.index') }}" method="GET">
+
+        @csrf
+            <div>keyword    
+                <input type="text" name="keyword">
+            </div>
+            <div>公開状況
+                <input type="radio" name="is_showing" value="2" checked>すべて
+                <input type="radio" name="is_showing" value="1">上映中
+                <input type="radio" name="is_showing" value="0">上映予定&nbsp
+                <input type="hidden" name="search" value="se">
+                <input type="submit" value="検索">
+            </div>
+        </form>
+    </div>
+
     <ul>
     @foreach ($movies as $movie)
         <li>title: {{ $movie->title }}</li>
